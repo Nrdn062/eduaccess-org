@@ -1,0 +1,2070 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduAccess AI — Democratizing AI Education &amp; Accessibility for Everyone</title>
+  <meta name="description" content="EduAccess AI (.org) adalah platform AI nirlaba & open source yang menyediakan alat bantu belajar interaktif dan teknologi aksesibilitas gratis untuk pelajar, pengajar, dan komunitas disabilitas di seluruh dunia." />
+  <meta name="theme-color" content="#4f46e5" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="EduAccess AI — Open Source & Non-Profit AI Initiative" />
+  <meta property="og:description" content="Democratizing AI Education & Accessibility for Everyone." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://eduaccess.org" />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%234f46e5'/><text x='50' y='68' font-size='58' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'>E</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50:  '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc',
+              400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca',
+              800: '#3730a3', 900: '#312e81', 950: '#1e1b4b',
+            },
+          },
+          keyframes: {
+            floaty: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-12px)' } },
+            floatySlow: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-18px)' } },
+            fadeUp: { '0%': { opacity: '0', transform: 'translateY(14px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+            pulseSoft: { '0%,100%': { opacity: '1' }, '50%': { opacity: '.4' } },
+            marquee: { from: { transform: 'translateX(0)' }, to: { transform: 'translateX(-50%)' } },
+            shimmer: { '100%': { transform: 'translateX(100%)' } },
+            gradientShift: { '0%,100%': { backgroundPosition: '0% 50%' }, '50%': { backgroundPosition: '100% 50%' } },
+            blob: {
+              '0%,100%': { transform: 'translate(0,0) scale(1)' },
+              '33%': { transform: 'translate(30px,-40px) scale(1.08)' },
+              '66%': { transform: 'translate(-25px,25px) scale(0.94)' },
+            },
+            tickerUp: { '0%': { transform: 'translateY(0)' }, '100%': { transform: 'translateY(-50%)' } },
+          },
+          animation: {
+            floaty: 'floaty 6s ease-in-out infinite',
+            floatySlow: 'floatySlow 8s ease-in-out infinite',
+            fadeUp: 'fadeUp .6s ease-out both',
+            fadeIn: 'fadeIn .8s ease-out both',
+            pulseSoft: 'pulseSoft 2s ease-in-out infinite',
+            marquee: 'marquee 40s linear infinite',
+            shimmer: 'shimmer 2s infinite',
+            gradientShift: 'gradientShift 8s ease infinite',
+            blob: 'blob 14s ease-in-out infinite',
+            tickerUp: 'tickerUp 14s linear infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { -webkit-tap-highlight-color: transparent; scroll-padding-top: 90px; }
+    body { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; }
+
+    /* ---------- Gradient text ---------- */
+    .gradient-text {
+      background-image: linear-gradient(100deg, #4f46e5 0%, #7c3aed 40%, #0ea5e9 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: gradientShift 8s ease infinite;
+    }
+
+    /* ---------- Hero grid mask ---------- */
+    .hero-grid {
+      background-image:
+        linear-gradient(to right, rgba(100,116,139,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(100,116,139,.10) 1px, transparent 1px);
+      background-size: 56px 56px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
+    }
+    .dark .hero-grid {
+      background-image:
+        linear-gradient(to right, rgba(148,163,184,.10) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148,163,184,.10) 1px, transparent 1px);
+    }
+
+    /* ---------- Scrollbar ---------- */
+    .thin-scroll::-webkit-scrollbar { width: 8px; height: 8px; }
+    .thin-scroll::-webkit-scrollbar-track { background: transparent; }
+    .thin-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+    .dark .thin-scroll::-webkit-scrollbar-thumb { background: #334155; }
+    .thin-scroll::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+
+    /* ---------- Spinner ---------- */
+    .spinner {
+      border: 3px solid rgba(99,102,241,.18);
+      border-top-color: #4f46e5;
+      border-radius: 9999px;
+      animation: spin .75s linear infinite;
+    }
+    .dark .spinner { border-color: rgba(129,140,248,.18); border-top-color: #818cf8; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ---------- Reveal on scroll ---------- */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .08s; }
+    .reveal-delay-2 { transition-delay: .16s; }
+    .reveal-delay-3 { transition-delay: .24s; }
+    .reveal-delay-4 { transition-delay: .32s; }
+
+    /* ---------- FAQ accordion ---------- */
+    .faq-content { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.4,0,.2,1); }
+    .faq-content.open { grid-template-rows: 1fr; }
+    .faq-content > div { overflow: hidden; }
+
+    /* ---------- Marquee ---------- */
+    .marquee-wrap { mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent); }
+
+    /* ---------- Shimmer for skeleton ---------- */
+    .shimmer { position: relative; overflow: hidden; }
+    .shimmer::after {
+      content: ''; position: absolute; inset: 0;
+      transform: translateX(-100%);
+      background-image: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+      animation: shimmer 1.6s infinite;
+    }
+    .dark .shimmer::after { background-image: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent); }
+
+    /* ---------- Selection ---------- */
+    ::selection { background: #4f46e5; color: #fff; }
+
+    /* ---------- Prettier number tabular ---------- */
+    .tabular { font-variant-numeric: tabular-nums; }
+
+    /* ---------- Back-to-top visibility handled with class ---------- */
+    .btt-hidden { opacity: 0; pointer-events: none; transform: translateY(12px); }
+    .btt-shown  { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
+  </style>
+</head>
+
+<body class="bg-slate-50 text-slate-700 antialiased dark:bg-slate-950 dark:text-slate-300">
+
+  <!-- ============ SCROLL PROGRESS ============ -->
+  <div id="scrollProgress" class="fixed top-0 left-0 z-[60] h-0.5 w-0 bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 transition-[width] duration-100"></div>
+
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <div id="announcement" class="relative z-40 border-b border-indigo-500/20 bg-slate-900 text-white dark:border-slate-800 dark:bg-slate-900">
+    <div class="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center text-[12px] font-medium sm:text-[13px]">
+      <span class="hidden h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-emerald-400 sm:block"></span>
+      <span class="text-slate-300">
+        <span class="font-bold text-white">Baru:</span> Model <span class="font-mono text-indigo-300">eduaccess-open-1</span> kini mendukung 26 bahasa &amp; mode disleksia.
+      </span>
+      <a href="#opensource" class="hidden items-center gap-1 font-semibold text-indigo-300 underline decoration-indigo-400/40 underline-offset-2 hover:text-indigo-200 sm:inline-flex">
+        Baca rilis <i data-lucide="arrow-right" class="h-3 w-3"></i>
+      </a>
+      <button id="closeAnnounce" aria-label="Tutup pengumuman" class="absolute right-3 top-1/2 -translate-y-1/2 rounded-md p-1 text-slate-400 transition hover:bg-white/10 hover:text-white">
+        <i data-lucide="x" class="h-3.5 w-3.5"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- ============ NAVBAR ============ -->
+  <header id="navbar" class="sticky top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl transition dark:border-slate-800/70 dark:bg-slate-950/80">
+    <nav class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8" aria-label="Navigasi utama">
+
+      <!-- Logo -->
+      <a href="#home" class="group flex items-center gap-2.5">
+        <span class="relative grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-500 shadow-lg shadow-indigo-500/25 transition group-hover:scale-105">
+          <i data-lucide="book-open" class="h-5 w-5 text-white"></i>
+          <span class="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-white bg-emerald-500 dark:border-slate-950"></span>
+        </span>
+        <span class="flex flex-col leading-none">
+          <span class="text-[17px] font-extrabold tracking-tight text-slate-900 dark:text-white">
+            EduAccess<span class="text-indigo-600 dark:text-indigo-400"> AI</span>
+          </span>
+          <span class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+            Non-Profit&nbsp;·&nbsp;.org
+          </span>
+        </span>
+      </a>
+
+      <!-- Desktop menu -->
+      <div class="hidden items-center gap-1 lg:flex">
+        <a href="#about" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white">About</a>
+        <a href="#how" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white">How it works</a>
+        <a href="#features" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white">Features</a>
+        <a href="#demo" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white">Live Demo</a>
+        <a href="#opensource" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white">Open Source</a>
+        <a href="#faq" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white">FAQ</a>
+        <a href="#contact" class="rounded-lg px-3.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-white">Contact</a>
+      </div>
+
+      <!-- Right actions -->
+      <div class="hidden items-center gap-2 lg:flex">
+        <button id="themeToggle" type="button" aria-label="Ganti tema"
+          class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-indigo-400">
+          <i data-lucide="moon" class="h-[18px] w-[18px] theme-icon-dark"></i>
+          <i data-lucide="sun" class="hidden h-[18px] w-[18px] theme-icon-light"></i>
+        </button>
+        <a href="#opensource" class="inline-flex items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-semibold text-slate-600 transition hover:bg-slate-100 hover:text-indigo-600 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-indigo-400">
+          <i data-lucide="github" class="h-4 w-4"></i>
+          <span class="hidden xl:inline">GitHub</span>
+        </a>
+        <a href="#contact"
+           class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-indigo-600/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950">
+          Get Involved
+          <i data-lucide="arrow-right" class="h-4 w-4"></i>
+        </a>
+      </div>
+
+      <!-- Mobile actions -->
+      <div class="flex items-center gap-2 lg:hidden">
+        <button id="themeToggleMobile" type="button" aria-label="Ganti tema"
+          class="grid h-10 w-10 place-items-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800">
+          <i data-lucide="moon" class="h-[18px] w-[18px] theme-icon-dark"></i>
+          <i data-lucide="sun" class="hidden h-[18px] w-[18px] theme-icon-light"></i>
+        </button>
+        <button id="menuBtn" type="button"
+                class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
+                aria-expanded="false" aria-controls="mobileMenu" aria-label="Buka menu">
+          <i data-lucide="menu" class="h-5 w-5" id="menuIcon"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden border-t border-slate-200 bg-white lg:hidden dark:border-slate-800 dark:bg-slate-950">
+      <div class="space-y-1 px-4 py-4 sm:px-6">
+        <a href="#about" class="mobile-link flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900">
+          <i data-lucide="info" class="h-4 w-4 text-indigo-500"></i> About
+        </a>
+        <a href="#how" class="mobile-link flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900">
+          <i data-lucide="route" class="h-4 w-4 text-indigo-500"></i> How it works
+        </a>
+        <a href="#features" class="mobile-link flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900">
+          <i data-lucide="layout-grid" class="h-4 w-4 text-indigo-500"></i> Features
+        </a>
+        <a href="#demo" class="mobile-link flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900">
+          <i data-lucide="play-circle" class="h-4 w-4 text-indigo-500"></i> Live Demo
+        </a>
+        <a href="#opensource" class="mobile-link flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900">
+          <i data-lucide="code-2" class="h-4 w-4 text-indigo-500"></i> Open Source
+        </a>
+        <a href="#faq" class="mobile-link flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900">
+          <i data-lucide="help-circle" class="h-4 w-4 text-indigo-500"></i> FAQ
+        </a>
+        <a href="#contact" class="mobile-link flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-50 dark:text-slate-300 dark:hover:bg-slate-900">
+          <i data-lucide="mail" class="h-4 w-4 text-indigo-500"></i> Contact
+        </a>
+        <a href="#contact" class="mobile-link mt-2 flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25">
+          Get Involved <i data-lucide="arrow-right" class="h-4 w-4"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+    <!-- ==================== HERO ==================== -->
+    <section id="home" class="relative overflow-hidden">
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="hero-grid absolute inset-0"></div>
+        <div class="absolute -left-24 -top-32 h-96 w-96 animate-blob rounded-full bg-indigo-300/30 blur-3xl dark:bg-indigo-600/20"></div>
+        <div class="absolute -top-20 right-0 h-96 w-96 animate-blob rounded-full bg-violet-300/30 blur-3xl dark:bg-violet-600/20" style="animation-delay:-4s"></div>
+        <div class="absolute bottom-0 left-1/3 h-72 w-72 animate-blob rounded-full bg-sky-200/40 blur-3xl dark:bg-sky-600/15" style="animation-delay:-8s"></div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-4 pb-20 pt-14 sm:px-6 sm:pt-20 lg:px-8 lg:pb-28 lg:pt-24">
+        <div class="mx-auto max-w-4xl text-center">
+
+          <!-- Badge -->
+          <div class="animate-fadeUp inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white/80 px-4 py-1.5 text-xs font-semibold text-indigo-700 shadow-sm backdrop-blur dark:border-indigo-900/60 dark:bg-slate-900/70 dark:text-indigo-300">
+            <span class="relative flex h-2 w-2">
+              <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-500 opacity-75"></span>
+              <span class="relative inline-flex h-2 w-2 rounded-full bg-indigo-600"></span>
+            </span>
+            Open Source &amp; Non-Profit AI Initiative
+          </div>
+
+          <!-- Headline -->
+          <h1 class="animate-fadeUp mt-6 text-4xl font-extrabold leading-[1.06] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.85rem] dark:text-white">
+            Democratizing
+            <span class="gradient-text">AI Education</span>
+            &amp; Accessibility for Everyone
+          </h1>
+
+          <!-- Sub-headline -->
+          <p class="animate-fadeUp mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-400">
+            Platform AI nirlaba yang menyediakan alat bantu belajar interaktif dan teknologi aksesibilitas
+            <strong class="font-semibold text-slate-800 dark:text-slate-200">gratis</strong> untuk pelajar, pengajar,
+            dan komunitas disabilitas di seluruh dunia.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="animate-fadeUp mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href="#demo"
+               class="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-indigo-600/30 transition hover:-translate-y-0.5 hover:bg-indigo-700 hover:shadow-indigo-600/40 sm:w-auto">
+              <i data-lucide="sparkles" class="h-[18px] w-[18px]"></i>
+              Try Live Demo
+              <i data-lucide="arrow-right" class="h-4 w-4 transition-transform group-hover:translate-x-0.5"></i>
+            </a>
+            <a href="#opensource"
+               class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:border-slate-400 hover:bg-slate-50 sm:w-auto dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-600 dark:hover:bg-slate-800">
+              <i data-lucide="github" class="h-[18px] w-[18px]"></i>
+              View GitHub Repository
+            </a>
+          </div>
+
+          <!-- Trust micro-copy -->
+          <div class="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs font-medium text-slate-500 dark:text-slate-500">
+            <span class="inline-flex items-center gap-1.5">
+              <i data-lucide="badge-check" class="h-4 w-4 text-emerald-500"></i> 100% Free &amp; Open Source
+            </span>
+            <span class="hidden h-1 w-1 rounded-full bg-slate-300 sm:block dark:bg-slate-700"></span>
+            <span class="inline-flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="h-4 w-4 text-emerald-500"></i> Privacy First
+            </span>
+            <span class="hidden h-1 w-1 rounded-full bg-slate-300 sm:block dark:bg-slate-700"></span>
+            <span class="inline-flex items-center gap-1.5">
+              <i data-lucide="cpu" class="h-4 w-4 text-emerald-500"></i> Powered by Advanced AI
+            </span>
+          </div>
+        </div>
+
+        <!-- Hero preview card -->
+        <div class="relative mx-auto mt-16 max-w-5xl">
+          <div class="absolute -inset-x-6 -top-6 bottom-0 -z-10 rounded-[2rem] bg-gradient-to-b from-indigo-200/50 to-transparent blur-2xl dark:from-indigo-900/40"></div>
+
+          <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl shadow-slate-300/40 dark:border-slate-800 dark:bg-slate-900 dark:shadow-black/40">
+            <div class="flex items-center gap-2 border-b border-slate-200 bg-slate-50/80 px-4 py-3 dark:border-slate-800 dark:bg-slate-950/60">
+              <span class="h-3 w-3 rounded-full bg-red-400"></span>
+              <span class="h-3 w-3 rounded-full bg-amber-400"></span>
+              <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
+              <span class="ml-3 flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[11px] font-medium text-slate-500 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-700">
+                <i data-lucide="lock" class="h-3 w-3 text-emerald-500"></i>
+                eduaccess.org / study-companion
+              </span>
+              <span class="ml-auto hidden items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-100 sm:inline-flex dark:bg-emerald-500/10 dark:text-emerald-400 dark:ring-emerald-500/20">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Live
+              </span>
+            </div>
+
+            <div class="grid gap-0 sm:grid-cols-5">
+              <div class="border-b border-slate-200 p-5 sm:col-span-2 sm:border-b-0 sm:border-r dark:border-slate-800">
+                <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <i data-lucide="file-text" class="h-3.5 w-3.5"></i> Input Materi
+                </div>
+                <div class="mt-3 space-y-2">
+                  <div class="h-2.5 w-full rounded-full bg-slate-100 dark:bg-slate-800"></div>
+                  <div class="h-2.5 w-11/12 rounded-full bg-slate-100 dark:bg-slate-800"></div>
+                  <div class="h-2.5 w-4/5 rounded-full bg-slate-100 dark:bg-slate-800"></div>
+                  <div class="h-2.5 w-10/12 rounded-full bg-slate-100 dark:bg-slate-800"></div>
+                  <div class="h-2.5 w-2/3 rounded-full bg-slate-100 dark:bg-slate-800"></div>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-1.5">
+                  <span class="rounded-full bg-indigo-50 px-2.5 py-1 text-[10px] font-semibold text-indigo-700 ring-1 ring-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-300 dark:ring-indigo-500/20">Ringkas</span>
+                  <span class="rounded-full bg-slate-50 px-2.5 py-1 text-[10px] font-semibold text-slate-500 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-700">Sederhanakan</span>
+                  <span class="rounded-full bg-slate-50 px-2.5 py-1 text-[10px] font-semibold text-slate-500 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-700">Poin Penting</span>
+                </div>
+              </div>
+
+              <div class="p-5 sm:col-span-3">
+                <div class="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                  <i data-lucide="sparkles" class="h-3.5 w-3.5 text-indigo-500"></i> Hasil AI
+                </div>
+                <div class="mt-3 space-y-3">
+                  <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-3 dark:border-slate-800 dark:bg-slate-950/50">
+                    <div class="flex items-center gap-2">
+                      <span class="grid h-6 w-6 place-items-center rounded-md bg-indigo-600">
+                        <i data-lucide="zap" class="h-3.5 w-3.5 text-white"></i>
+                      </span>
+                      <div class="h-2.5 w-28 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                    </div>
+                    <div class="mt-3 space-y-2">
+                      <div class="h-2 w-full rounded-full bg-slate-200/80 dark:bg-slate-700/80"></div>
+                      <div class="h-2 w-9/12 rounded-full bg-slate-200/80 dark:bg-slate-700/80"></div>
+                    </div>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:ring-emerald-500/20">
+                      <i data-lucide="shield-check" class="h-3 w-3"></i> Safety Checked
+                    </span>
+                    <span class="inline-flex items-center gap-1 rounded-full bg-sky-50 px-2.5 py-1 text-[10px] font-semibold text-sky-700 ring-1 ring-sky-100 dark:bg-sky-500/10 dark:text-sky-400 dark:ring-sky-500/20">
+                      <i data-lucide="eye-off" class="h-3 w-3"></i> No Data Stored
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== PARTNERS MARQUEE ==================== -->
+    <section class="border-y border-slate-200 bg-white py-8 dark:border-slate-800 dark:bg-slate-950">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p class="mb-6 text-center text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
+          Dipercaya oleh sekolah, universitas &amp; komunitas
+        </p>
+        <div class="marquee-wrap overflow-hidden">
+          <div class="flex w-max animate-marquee items-center gap-12 opacity-70 dark:opacity-60">
+            <!-- Set 1 -->
+            <div class="flex shrink-0 items-center gap-12">
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="graduation-cap" class="h-5 w-5"></i> Universitas Nusantara</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="library" class="h-5 w-5"></i> Pustaka Digital ID</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="accessibility" class="h-5 w-5"></i> Difabel Berkarya</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="lightbulb" class="h-5 w-5"></i> Guru Inovatif</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="globe-2" class="h-5 w-5"></i> OpenLearn Asia</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="brain" class="h-5 w-5"></i> AI Safety ID</span>
+            </div>
+            <!-- Set 2 (duplicate for seamless loop) -->
+            <div class="flex shrink-0 items-center gap-12" aria-hidden="true">
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="graduation-cap" class="h-5 w-5"></i> Universitas Nusantara</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="library" class="h-5 w-5"></i> Pustaka Digital ID</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="accessibility" class="h-5 w-5"></i> Difabel Berkarya</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="lightbulb" class="h-5 w-5"></i> Guru Inovatif</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="globe-2" class="h-5 w-5"></i> OpenLearn Asia</span>
+              <span class="flex items-center gap-2 text-base font-bold text-slate-500 dark:text-slate-400"><i data-lucide="brain" class="h-5 w-5"></i> AI Safety ID</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== ABOUT / MISSION ==================== -->
+    <section id="about" class="bg-slate-50 py-20 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+          <div class="reveal">
+            <span class="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-indigo-700 ring-1 ring-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-300 dark:ring-indigo-500/20">
+              <i data-lucide="heart-handshake" class="h-3.5 w-3.5"></i> Tentang Inisiatif
+            </span>
+            <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+              Teknologi AI yang seharusnya <span class="gradient-text">dapat diakses semua orang</span>
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+              EduAccess AI Foundation adalah organisasi nirlaba terdaftar yang membangun perangkat lunak
+              pendidikan berbasis AI dan bersumber terbuka. Kami percaya bahwa akses terhadap tutor berkualitas
+              dan alat bantu belajar tidak boleh ditentukan oleh kemampuan ekonomi, lokasi geografis, atau kondisi
+              disabilitas seseorang.
+            </p>
+            <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+              Seluruh model, dataset, dan kode kami diaudit secara berkala untuk memastikan keamanan, inklusivitas,
+              dan bebas dari bias yang merugikan kelompok tertentu.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a href="#features" class="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100">
+                Lihat Misi Kami <i data-lucide="arrow-right" class="h-4 w-4"></i>
+              </a>
+              <a href="#opensource" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-900">
+                <i data-lucide="file-text" class="h-4 w-4"></i> Baca Whitepaper
+              </a>
+            </div>
+          </div>
+
+          <!-- Impact numbers -->
+          <div class="reveal grid grid-cols-2 gap-4 sm:gap-5">
+            <div class="group rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:from-slate-900 dark:to-slate-950">
+              <div class="grid h-10 w-10 place-items-center rounded-xl bg-indigo-100 text-indigo-600 transition group-hover:bg-indigo-600 group-hover:text-white dark:bg-indigo-500/10 dark:text-indigo-400">
+                <i data-lucide="users" class="h-5 w-5"></i>
+              </div>
+              <p class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 tabular dark:text-white">
+                <span class="counter" data-target="12400">0</span><span class="text-indigo-600 dark:text-indigo-400">+</span>
+              </p>
+              <p class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-500">Pelajar terbantu setiap bulan</p>
+            </div>
+            <div class="group rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:from-slate-900 dark:to-slate-950">
+              <div class="grid h-10 w-10 place-items-center rounded-xl bg-violet-100 text-violet-600 transition group-hover:bg-violet-600 group-hover:text-white dark:bg-violet-500/10 dark:text-violet-400">
+                <i data-lucide="globe-2" class="h-5 w-5"></i>
+              </div>
+              <p class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 tabular dark:text-white">
+                <span class="counter" data-target="38">0</span>
+              </p>
+              <p class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-500">Negara dengan pengguna aktif</p>
+            </div>
+            <div class="group rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:from-slate-900 dark:to-slate-950">
+              <div class="grid h-10 w-10 place-items-center rounded-xl bg-sky-100 text-sky-600 transition group-hover:bg-sky-600 group-hover:text-white dark:bg-sky-500/10 dark:text-sky-400">
+                <i data-lucide="school" class="h-5 w-5"></i>
+              </div>
+              <p class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 tabular dark:text-white">
+                <span class="counter" data-target="640">0</span><span class="text-sky-600 dark:text-sky-400">+</span>
+              </p>
+              <p class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-500">Sekolah &amp; komunitas mitra</p>
+            </div>
+            <div class="group rounded-2xl border border-slate-200 bg-gradient-to-b from-white to-slate-50 p-5 shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:from-slate-900 dark:to-slate-950">
+              <div class="grid h-10 w-10 place-items-center rounded-xl bg-emerald-100 text-emerald-600 transition group-hover:bg-emerald-600 group-hover:text-white dark:bg-emerald-500/10 dark:text-emerald-400">
+                <i data-lucide="coins" class="h-5 w-5"></i>
+              </div>
+              <p class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 tabular dark:text-white">
+                Rp&nbsp;0
+              </p>
+              <p class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-500">Biaya untuk pengguna selamanya</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section id="how" class="border-y border-slate-200 bg-white py-20 dark:border-slate-800 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <span class="inline-flex items-center gap-2 rounded-full bg-sky-50 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-sky-700 ring-1 ring-sky-100 dark:bg-sky-500/10 dark:text-sky-300 dark:ring-sky-500/20">
+            <i data-lucide="route" class="h-3.5 w-3.5"></i> Cara Kerja
+          </span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            Tiga langkah, tanpa hambatan
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            Kami sengaja membuat prosesnya sesederhana mungkin — tanpa registrasi, tanpa biaya,
+            tanpa pengumpulan data pribadi.
+          </p>
+        </div>
+
+        <div class="relative mt-14 grid gap-8 lg:grid-cols-3 lg:gap-6">
+          <!-- connector line -->
+          <div class="absolute left-1/2 top-12 hidden h-0.5 w-2/3 -translate-x-1/2 bg-gradient-to-r from-indigo-200 via-violet-200 to-sky-200 lg:block dark:from-indigo-900 dark:via-violet-900 dark:to-sky-900"></div>
+
+          <div class="reveal reveal-delay-1 relative rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 text-white shadow-lg shadow-indigo-500/30">
+              <i data-lucide="clipboard-paste" class="h-6 w-6"></i>
+            </div>
+            <p class="mt-4 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">Langkah 01</p>
+            <h3 class="mt-2 text-lg font-bold text-slate-900 dark:text-white">Tempel materi apa pun</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Artikel, bab buku, catatan kuliah, atau soal latihan. Cukup tempel ke panel demo.
+            </p>
+          </div>
+
+          <div class="reveal reveal-delay-2 relative rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-violet-600 to-fuchsia-600 text-white shadow-lg shadow-violet-500/30">
+              <i data-lucide="sliders-horizontal" class="h-6 w-6"></i>
+            </div>
+            <p class="mt-4 text-xs font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">Langkah 02</p>
+            <h3 class="mt-2 text-lg font-bold text-slate-900 dark:text-white">Pilih mode belajar</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Ringkas untuk kerangka cepat, sederhanakan untuk pemahaman, atau ekstrak poin penting.
+            </p>
+          </div>
+
+          <div class="reveal reveal-delay-3 relative rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-sky-600 to-indigo-600 text-white shadow-lg shadow-sky-500/30">
+              <i data-lucide="sparkles" class="h-6 w-6"></i>
+            </div>
+            <p class="mt-4 text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">Langkah 03</p>
+            <h3 class="mt-2 text-lg font-bold text-slate-900 dark:text-white">Dapatkan hasil instan</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Output yang rapi, ramah aksesibilitas, siap disalin atau diunduh — gratis selamanya.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== LIVE DEMO ==================== -->
+    <section id="demo" class="relative overflow-hidden bg-slate-50 py-20 dark:bg-slate-950 lg:py-24">
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="absolute left-1/2 top-10 h-72 w-[40rem] -translate-x-1/2 rounded-full bg-indigo-200/30 blur-3xl dark:bg-indigo-900/20"></div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <span class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-indigo-700 ring-1 ring-indigo-100 dark:bg-slate-900 dark:text-indigo-300 dark:ring-indigo-900/50">
+            <i data-lucide="play-circle" class="h-3.5 w-3.5"></i> Live Demo Interaktif
+          </span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            Coba asisten belajar AI kami
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            Ini adalah simulasi antarmuka asli. Tempelkan materi pelajaran apa pun, pilih mode, dan lihat
+            bagaimana EduAccess AI membantu memahami konten dengan lebih cepat.
+          </p>
+        </div>
+
+        <!-- Demo card -->
+        <div class="reveal mx-auto mt-12 max-w-6xl overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-2xl shadow-slate-300/40 dark:border-slate-800 dark:bg-slate-900 dark:shadow-black/40">
+
+          <!-- window bar -->
+          <div class="flex items-center gap-2 border-b border-slate-200 bg-slate-50/80 px-4 py-3 sm:px-5 dark:border-slate-800 dark:bg-slate-950/60">
+            <span class="h-3 w-3 rounded-full bg-red-400"></span>
+            <span class="h-3 w-3 rounded-full bg-amber-400"></span>
+            <span class="h-3 w-3 rounded-full bg-emerald-400"></span>
+            <span class="ml-3 flex items-center gap-1.5 rounded-md bg-white px-2.5 py-1 text-[11px] font-medium text-slate-500 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:ring-slate-700">
+              <i data-lucide="lock" class="h-3 w-3 text-emerald-500"></i>
+              eduaccess.org / demo-assistant
+            </span>
+            <span class="ml-auto hidden items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold text-emerald-700 ring-1 ring-emerald-100 sm:inline-flex dark:bg-emerald-500/10 dark:text-emerald-400 dark:ring-emerald-500/20">
+              <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span> Demo Mode
+            </span>
+          </div>
+
+          <div class="grid lg:grid-cols-2">
+
+            <!-- ========== INPUT PANEL ========== -->
+            <div class="border-b border-slate-200 p-5 sm:p-7 lg:border-b-0 lg:border-r dark:border-slate-800">
+              <div class="flex items-center justify-between">
+                <label for="demoInput" class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  <i data-lucide="file-text" class="h-4 w-4 text-indigo-500"></i>
+                  Input Materi
+                </label>
+                <div class="flex items-center gap-1">
+                  <button id="micBtn" type="button" title="Simulasi input suara"
+                    class="grid h-7 w-7 place-items-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-indigo-600 dark:hover:bg-slate-800 dark:hover:text-indigo-400">
+                    <i data-lucide="mic" class="h-3.5 w-3.5"></i>
+                  </button>
+                  <button id="uploadBtn" type="button" title="Simulasi unggah file"
+                    class="grid h-7 w-7 place-items-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-indigo-600 dark:hover:bg-slate-800 dark:hover:text-indigo-400">
+                    <i data-lucide="paperclip" class="h-3.5 w-3.5"></i>
+                  </button>
+                  <button id="clearBtn" type="button" class="rounded-lg px-2 py-1 text-[11px] font-semibold text-slate-400 transition hover:bg-slate-100 hover:text-slate-700 dark:hover:bg-slate-800 dark:hover:text-slate-200">
+                    Bersihkan
+                  </button>
+                </div>
+              </div>
+
+              <textarea id="demoInput" rows="7" maxlength="5000"
+                placeholder="Masukkan teks atau materi pelajaran di sini..."
+                class="thin-scroll mt-3 w-full resize-none rounded-2xl border border-slate-200 bg-slate-50/60 p-4 text-sm leading-relaxed text-slate-800 placeholder:text-slate-400 transition focus:border-indigo-400 focus:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-100 dark:border-slate-700 dark:bg-slate-950/50 dark:text-slate-200 dark:placeholder:text-slate-500 dark:focus:border-indigo-500 dark:focus:bg-slate-950 dark:focus:ring-indigo-500/20"></textarea>
+
+              <div class="mt-2 flex items-center justify-between text-[11px] text-slate-400 dark:text-slate-500">
+                <span id="charCount">0 karakter · 0 kata</span>
+                <span>Maks. 5.000 karakter</span>
+              </div>
+
+              <!-- Sample chips -->
+              <div class="mt-4">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Contoh cepat</p>
+                <div class="mt-2 flex flex-wrap gap-1.5">
+                  <button type="button" data-sample="fotosintesis"
+                    class="sample-chip rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-indigo-600 dark:hover:bg-indigo-500/10 dark:hover:text-indigo-300">
+                    🌱 Fotosintesis
+                  </button>
+                  <button type="button" data-sample="sejarah"
+                    class="sample-chip rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-indigo-600 dark:hover:bg-indigo-500/10 dark:hover:text-indigo-300">
+                    📜 Proklamasi
+                  </button>
+                  <button type="button" data-sample="matematika"
+                    class="sample-chip rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-indigo-600 dark:hover:bg-indigo-500/10 dark:hover:text-indigo-300">
+                    📐 Pythagoras
+                  </button>
+                </div>
+              </div>
+
+              <!-- Mode selector -->
+              <p class="mt-6 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Pilih Mode</p>
+              <div class="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+                <button type="button" data-mode="ringkas"
+                  class="mode-btn flex items-start gap-2.5 rounded-xl border p-3 text-left transition">
+                  <i data-lucide="align-left" class="mt-0.5 h-4 w-4 shrink-0"></i>
+                  <span class="flex flex-col">
+                    <span class="text-xs font-bold leading-tight">Ringkas Teks</span>
+                    <span class="mt-0.5 text-[10px] font-medium opacity-70">Versi padat</span>
+                  </span>
+                </button>
+                <button type="button" data-mode="sederhana"
+                  class="mode-btn flex items-start gap-2.5 rounded-xl border p-3 text-left transition">
+                  <i data-lucide="baby" class="mt-0.5 h-4 w-4 shrink-0"></i>
+                  <span class="flex flex-col">
+                    <span class="text-xs font-bold leading-tight">Sederhanakan</span>
+                    <span class="mt-0.5 text-[10px] font-medium opacity-70">Bahasa mudah</span>
+                  </span>
+                </button>
+                <button type="button" data-mode="poin"
+                  class="mode-btn flex items-start gap-2.5 rounded-xl border p-3 text-left transition">
+                  <i data-lucide="list-checks" class="mt-0.5 h-4 w-4 shrink-0"></i>
+                  <span class="flex flex-col">
+                    <span class="text-xs font-bold leading-tight">Poin Penting</span>
+                    <span class="mt-0.5 text-[10px] font-medium opacity-70">Bullet list</span>
+                  </span>
+                </button>
+              </div>
+
+              <!-- Process button -->
+              <button id="processBtn" type="button"
+                class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3.5 text-sm font-semibold text-white shadow-xl shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:shadow-indigo-600/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 dark:focus-visible:ring-offset-slate-900">
+                <i data-lucide="sparkles" class="h-[18px] w-[18px]" id="processIcon"></i>
+                <span id="processLabel">Proses dengan AI</span>
+              </button>
+
+              <p class="mt-3 flex items-center justify-center gap-1.5 text-[11px] text-slate-400 dark:text-slate-500">
+                <i data-lucide="shield-check" class="h-3.5 w-3.5 text-emerald-500"></i>
+                Simulasi lokal — teks Anda tidak dikirim ke server mana pun.
+              </p>
+            </div>
+
+            <!-- ========== OUTPUT PANEL ========== -->
+            <div class="bg-slate-50/70 p-5 sm:p-7 dark:bg-slate-950/40">
+              <div class="flex items-center justify-between">
+                <span class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  <i data-lucide="bot" class="h-4 w-4 text-indigo-500"></i>
+                  Hasil AI
+                </span>
+                <div class="flex items-center gap-1.5">
+                  <span id="outputBadge" class="hidden rounded-full bg-indigo-100 px-2.5 py-1 text-[10px] font-bold text-indigo-700 dark:bg-indigo-500/20 dark:text-indigo-300">—</span>
+                  <button id="copyBtn" type="button" title="Salin hasil" disabled
+                    class="grid h-7 w-7 place-items-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-indigo-600 disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-slate-800 dark:hover:text-indigo-400">
+                    <i data-lucide="copy" class="h-3.5 w-3.5"></i>
+                  </button>
+                  <button id="downloadBtn" type="button" title="Unduh hasil" disabled
+                    class="grid h-7 w-7 place-items-center rounded-lg text-slate-400 transition hover:bg-slate-100 hover:text-indigo-600 disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-slate-800 dark:hover:text-indigo-400">
+                    <i data-lucide="download" class="h-3.5 w-3.5"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div id="outputBox"
+                class="thin-scroll mt-3 min-h-[22rem] overflow-y-auto rounded-2xl border border-dashed border-slate-300 bg-white p-5 dark:border-slate-700 dark:bg-slate-900">
+
+                <!-- Empty state -->
+                <div id="emptyState" class="flex h-full min-h-[19rem] flex-col items-center justify-center text-center">
+                  <div class="grid h-14 w-14 place-items-center rounded-2xl bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500">
+                    <i data-lucide="wand-sparkles" class="h-7 w-7"></i>
+                  </div>
+                  <p class="mt-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Belum ada hasil</p>
+                  <p class="mt-1 max-w-xs text-xs leading-relaxed text-slate-400 dark:text-slate-500">
+                    Tulis atau tempel materi pelajaran di panel kiri, pilih mode, lalu tekan
+                    <span class="font-semibold text-slate-500 dark:text-slate-400">"Proses dengan AI"</span>.
+                  </p>
+                </div>
+              </div>
+
+              <!-- History -->
+              <div id="historyWrap" class="mt-4 hidden">
+                <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Riwayat sesi ini</p>
+                <div id="historyList" class="mt-2 flex flex-wrap gap-1.5"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== FEATURES ==================== -->
+    <section id="features" class="border-y border-slate-200 bg-white py-20 dark:border-slate-800 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <span class="inline-flex items-center gap-2 rounded-full bg-violet-50 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-violet-700 ring-1 ring-violet-100 dark:bg-violet-500/10 dark:text-violet-300 dark:ring-violet-500/20">
+            <i data-lucide="layout-grid" class="h-3.5 w-3.5"></i> Fitur &amp; Misi
+          </span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            Dibangun untuk dampak, bukan untuk keuntungan
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            Setiap fitur dirancang bersama guru, terapis wicara, dan komunitas disabilitas — lalu dirilis
+            sebagai perangkat lunak bebas untuk siapa saja.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="reveal reveal-delay-1 group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-indigo-300 hover:shadow-xl hover:shadow-indigo-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-indigo-700 dark:hover:shadow-indigo-900/20">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-indigo-100 text-indigo-600 transition group-hover:bg-indigo-600 group-hover:text-white dark:bg-indigo-500/10 dark:text-indigo-400">
+              <i data-lucide="graduation-cap" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-base font-bold text-slate-900 dark:text-white">AI Study Companion</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Tutor belajar personal gratis yang menyesuaikan penjelasan dengan level pemahaman tiap pelajar,
+              24 jam sehari, dalam bahasa apa pun.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-indigo-600 opacity-0 transition group-hover:opacity-100 dark:text-indigo-400">
+              Pelajari <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+            </span>
+          </div>
+
+          <div class="reveal reveal-delay-2 group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-violet-300 hover:shadow-xl hover:shadow-violet-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-violet-700 dark:hover:shadow-violet-900/20">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-violet-100 text-violet-600 transition group-hover:bg-violet-600 group-hover:text-white dark:bg-violet-500/10 dark:text-violet-400">
+              <i data-lucide="accessibility" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-base font-bold text-slate-900 dark:text-white">Inclusive Reading Assistant</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Alat bantu baca untuk disleksia &amp; tuna netra: text-to-speech natural, mode huruf ramah disleksia,
+              dan struktur bacaan yang bisa dinavigasi.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-violet-600 opacity-0 transition group-hover:opacity-100 dark:text-violet-400">
+              Pelajari <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+            </span>
+          </div>
+
+          <div class="reveal reveal-delay-3 group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-sky-300 hover:shadow-xl hover:shadow-sky-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-sky-700 dark:hover:shadow-sky-900/20">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-sky-100 text-sky-600 transition group-hover:bg-sky-600 group-hover:text-white dark:bg-sky-500/10 dark:text-sky-400">
+              <i data-lucide="shield-check" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-base font-bold text-slate-900 dark:text-white">Open Research &amp; Safety</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Komitmen penuh pada AI yang aman dan tanpa bias. Kami mempublikasikan kartu model, hasil evaluasi,
+              dan metodologi audit secara terbuka.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-sky-600 opacity-0 transition group-hover:opacity-100 dark:text-sky-400">
+              Pelajari <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+            </span>
+          </div>
+
+          <div class="reveal reveal-delay-4 group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-100 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-emerald-700 dark:hover:shadow-emerald-900/20">
+            <div class="grid h-12 w-12 place-items-center rounded-xl bg-emerald-100 text-emerald-600 transition group-hover:bg-emerald-600 group-hover:text-white dark:bg-emerald-500/10 dark:text-emerald-400">
+              <i data-lucide="lock" class="h-6 w-6"></i>
+            </div>
+            <h3 class="mt-5 text-base font-bold text-slate-900 dark:text-white">Data Privacy First</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+              Kami tidak menyimpan, menjual, atau memprofilkan data pengguna. Tidak ada iklan, tidak ada pelacak
+              pihak ketiga, tidak ada monetisasi data.
+            </p>
+            <span class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 opacity-0 transition group-hover:opacity-100 dark:text-emerald-400">
+              Pelajari <i data-lucide="arrow-right" class="h-3.5 w-3.5"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Safety banner -->
+        <div class="reveal mt-12 overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-6 sm:p-8 dark:border-slate-800 dark:bg-slate-900">
+          <div class="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+            <div class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-indigo-600/20 text-indigo-300 ring-1 ring-indigo-500/30">
+              <i data-lucide="scale" class="h-7 w-7"></i>
+            </div>
+            <div class="flex-1">
+              <h3 class="text-lg font-bold text-white">AI Safety &amp; Ethics Charter</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-400">
+                Kami berkomitmen pada transparansi model, evaluasi bias berkala, perlindungan data anak,
+                dan keterlibatan komunitas dalam setiap keputusan rilis.
+              </p>
+            </div>
+            <a href="#opensource" class="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white/10 px-5 py-3 text-sm font-semibold text-white ring-1 ring-white/15 transition hover:bg-white/15">
+              Baca Charter <i data-lucide="arrow-up-right" class="h-4 w-4"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== TESTIMONIALS ==================== -->
+    <section class="bg-slate-50 py-20 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <span class="inline-flex items-center gap-2 rounded-full bg-amber-50 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-700 ring-1 ring-amber-100 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/20">
+            <i data-lucide="quote" class="h-3.5 w-3.5"></i> Testimoni
+          </span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            Cerita dari mereka yang terbantu
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            Umpan balik dari guru, pelajar, dan komunitas disabilitas yang menggunakan alat kami setiap hari.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-3">
+          <!-- Testimonial 1 -->
+          <figure class="reveal reveal-delay-1 flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="flex gap-0.5 text-amber-400">
+              <i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            </div>
+            <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+              “Fitur Sederhanakan Bahasa mengubah cara saya mengajar siswa kelas 4 yang kesulitan membaca.
+              Materi yang tadinya menakutkan jadi bisa diakses dalam hitungan detik.”
+            </blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
+              <span class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-sm font-bold text-white">RA</span>
+              <div>
+                <p class="text-sm font-bold text-slate-900 dark:text-white">Rina Anggraini</p>
+                <p class="text-xs text-slate-500 dark:text-slate-500">Guru SD · Bandung</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <!-- Testimonial 2 -->
+          <figure class="reveal reveal-delay-2 flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="flex gap-0.5 text-amber-400">
+              <i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            </div>
+            <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+              “Sebagai tunanetra, saya bergantung pada screen reader. Struktur output EduAccess AI sangat
+              bersih dan ramah dibaca — sesuatu yang jarang saya temui di aplikasi lain.”
+            </blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
+              <span class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-sky-500 to-indigo-500 text-sm font-bold text-white">BP</span>
+              <div>
+                <p class="text-sm font-bold text-slate-900 dark:text-white">Bagas Pratama</p>
+                <p class="text-xs text-slate-500 dark:text-slate-500">Mahasiswa · Surabaya</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <!-- Testimonial 3 -->
+          <figure class="reveal reveal-delay-3 flex flex-col rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <div class="flex gap-0.5 text-amber-400">
+              <i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i><i data-lucide="star" class="h-4 w-4 fill-current"></i>
+            </div>
+            <blockquote class="mt-4 flex-1 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+              “Kami mengintegrasikan API-nya ke perpustakaan desa. Dokumentasi jelas, dan dukungan komunitasnya
+              luar biasa. Nol biaya, dampak maksimal.”
+            </blockquote>
+            <figcaption class="mt-5 flex items-center gap-3 border-t border-slate-100 pt-5 dark:border-slate-800">
+              <span class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-sm font-bold text-white">YS</span>
+              <div>
+                <p class="text-sm font-bold text-slate-900 dark:text-white">Yusuf Santoso</p>
+                <p class="text-xs text-slate-500 dark:text-slate-500">Pengelola Perpustakaan · Makassar</p>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== OPEN SOURCE ==================== -->
+    <section id="opensource" class="relative overflow-hidden border-y border-slate-200 bg-white py-20 dark:border-slate-800 dark:bg-slate-950 lg:py-24">
+      <div class="pointer-events-none absolute inset-0 -z-10">
+        <div class="absolute -bottom-20 right-0 h-80 w-80 rounded-full bg-violet-200/40 blur-3xl dark:bg-violet-900/20"></div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="grid items-center gap-14 lg:grid-cols-2">
+          <div class="reveal">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 ring-1 ring-slate-200 dark:bg-slate-900 dark:text-slate-300 dark:ring-slate-800">
+              <i data-lucide="code-2" class="h-3.5 w-3.5"></i> Open Source &amp; Community
+            </span>
+            <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+              Dibangun oleh komunitas, untuk komunitas
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+              EduAccess AI Foundation adalah organisasi nirlaba yang dijalankan oleh relawan: guru, peneliti AI,
+              insinyur perangkat lunak, dan aktivis aksesibilitas dari berbagai negara. Seluruh basis kode kami
+              berlisensi <span class="font-semibold text-slate-800 dark:text-slate-200">Apache 2.0</span> dan dapat diaudit siapa saja.
+            </p>
+
+            <ul class="mt-6 space-y-3">
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+                  <i data-lucide="check" class="h-3 w-3"></i>
+                </span>
+                <span class="text-sm text-slate-600 dark:text-slate-400">API publik yang terdokumentasi lengkap &amp; gratis untuk institusi pendidikan.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+                  <i data-lucide="check" class="h-3 w-3"></i>
+                </span>
+                <span class="text-sm text-slate-600 dark:text-slate-400">Kontribusi terbuka untuk penerjemahan, dataset lokal, dan pengujian aksesibilitas.</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-400">
+                  <i data-lucide="check" class="h-3 w-3"></i>
+                </span>
+                <span class="text-sm text-slate-600 dark:text-slate-400">Tata kelola transparan: laporan keuangan tahunan dipublikasikan terbuka.</span>
+              </li>
+            </ul>
+
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a href="#contact"
+                 class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-slate-900/20 transition hover:-translate-y-0.5 hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100">
+                <i data-lucide="github" class="h-[18px] w-[18px]"></i>
+                Contribute on GitHub
+              </a>
+              <a href="#contact"
+                 class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 transition hover:-translate-y-0.5 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800">
+                <i data-lucide="book-open-text" class="h-[18px] w-[18px]"></i>
+                Read Documentation
+              </a>
+            </div>
+
+            <div class="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-slate-200 pt-6 dark:border-slate-800">
+              <div>
+                <p class="text-xl font-extrabold text-slate-900 dark:text-white"><span class="counter" data-target="1200">0</span>+</p>
+                <p class="text-[11px] font-medium uppercase tracking-wider text-slate-400">GitHub Stars</p>
+              </div>
+              <div>
+                <p class="text-xl font-extrabold text-slate-900 dark:text-white"><span class="counter" data-target="214">0</span></p>
+                <p class="text-[11px] font-medium uppercase tracking-wider text-slate-400">Kontributor</p>
+              </div>
+              <div>
+                <p class="text-xl font-extrabold text-slate-900 dark:text-white"><span class="counter" data-target="26">0</span></p>
+                <p class="text-[11px] font-medium uppercase tracking-wider text-slate-400">Bahasa Didukung</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Code card -->
+          <div class="reveal">
+            <div class="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 shadow-2xl shadow-slate-400/30 dark:shadow-black/50">
+              <div class="flex items-center gap-2 border-b border-slate-800 bg-slate-950/60 px-4 py-3">
+                <span class="h-3 w-3 rounded-full bg-red-400/80"></span>
+                <span class="h-3 w-3 rounded-full bg-amber-400/80"></span>
+                <span class="h-3 w-3 rounded-full bg-emerald-400/80"></span>
+                <span class="ml-3 flex items-center gap-1.5 font-mono text-[11px] text-slate-400">
+                  <i data-lucide="folder-git-2" class="h-3.5 w-3.5"></i>
+                  api/v1/assist.ts
+                </span>
+                <button id="copyCodeBtn" class="ml-auto rounded-md px-2 py-1 text-[10px] font-semibold text-slate-400 transition hover:bg-white/10 hover:text-white">
+                  Salin
+                </button>
+              </div>
+
+              <pre id="codeBlock" class="thin-scroll overflow-x-auto p-5 font-mono text-[12px] leading-relaxed text-slate-300"><code><span class="text-slate-500">// EduAccess AI — Public API (Apache 2.0)</span>
+<span class="text-violet-400">POST</span> <span class="text-emerald-400">/v1/assist</span>
+{
+  <span class="text-sky-300">"mode"</span>: <span class="text-amber-300">"simplify"</span>,
+  <span class="text-sky-300">"text"</span>: <span class="text-amber-300">"..."</span>,
+  <span class="text-sky-300">"language"</span>: <span class="text-amber-300">"id"</span>,
+  <span class="text-sky-300">"accessibility"</span>: {
+    <span class="text-sky-300">"dyslexia_font"</span>: <span class="text-orange-400">true</span>,
+    <span class="text-sky-300">"screen_reader"</span>: <span class="text-orange-400">true</span>
+  },
+  <span class="text-sky-300">"retain_data"</span>: <span class="text-orange-400">false</span>   <span class="text-slate-500">// always false</span>
+}
+
+<span class="text-slate-500">→ 200 OK</span>
+{
+  <span class="text-sky-300">"result"</span>: <span class="text-amber-300">"..."</span>,
+  <span class="text-sky-300">"model"</span>: <span class="text-amber-300">"eduaccess-open-1"</span>,
+  <span class="text-sky-300">"safety_checked"</span>: <span class="text-orange-400">true</span>,
+  <span class="text-sky-300">"bias_score"</span>: <span class="text-orange-400">0.02</span>
+}</code></pre>
+
+              <div class="flex flex-wrap items-center gap-2 border-t border-slate-800 bg-slate-950/40 px-5 py-3">
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-2.5 py-1 text-[10px] font-semibold text-emerald-400 ring-1 ring-emerald-500/20">
+                  <i data-lucide="shield-check" class="h-3 w-3"></i> Audited
+                </span>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/10 px-2.5 py-1 text-[10px] font-semibold text-indigo-300 ring-1 ring-indigo-500/20">
+                  <i data-lucide="scale" class="h-3 w-3"></i> Apache 2.0
+                </span>
+                <span class="inline-flex items-center gap-1.5 rounded-full bg-sky-500/10 px-2.5 py-1 text-[10px] font-semibold text-sky-300 ring-1 ring-sky-500/20">
+                  <i data-lucide="git-branch" class="h-3 w-3"></i> v1.4.0
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== TEAM ==================== -->
+    <section class="bg-slate-50 py-20 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal mx-auto max-w-2xl text-center">
+          <span class="inline-flex items-center gap-2 rounded-full bg-rose-50 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-rose-700 ring-1 ring-rose-100 dark:bg-rose-500/10 dark:text-rose-300 dark:ring-rose-500/20">
+            <i data-lucide="users-2" class="h-3.5 w-3.5"></i> Tim &amp; Penasihat
+          </span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            Relawan di balik layar
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            Semua orang di sini bekerja tanpa bayaran — karena misi ini terlalu penting untuk ditunda.
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="reveal reveal-delay-1 rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+            <span class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-indigo-500 to-violet-500 text-xl font-extrabold text-white">AS</span>
+            <p class="mt-4 text-sm font-bold text-slate-900 dark:text-white">Aditya Suryana</p>
+            <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-500">Founder · AI Research Lead</p>
+            <div class="mt-3 flex justify-center gap-2 text-slate-400">
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="github" class="h-4 w-4"></i></a>
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="linkedin" class="h-4 w-4"></i></a>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-2 rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+            <span class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-violet-500 to-fuchsia-500 text-xl font-extrabold text-white">MK</span>
+            <p class="mt-4 text-sm font-bold text-slate-900 dark:text-white">Maria Kusuma</p>
+            <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-500">Head of Accessibility</p>
+            <div class="mt-3 flex justify-center gap-2 text-slate-400">
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="github" class="h-4 w-4"></i></a>
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="linkedin" class="h-4 w-4"></i></a>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-3 rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+            <span class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-sky-500 to-cyan-500 text-xl font-extrabold text-white">RF</span>
+            <p class="mt-4 text-sm font-bold text-slate-900 dark:text-white">Rizky Firmansyah</p>
+            <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-500">Engineering Lead</p>
+            <div class="mt-3 flex justify-center gap-2 text-slate-400">
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="github" class="h-4 w-4"></i></a>
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="linkedin" class="h-4 w-4"></i></a>
+            </div>
+          </div>
+          <div class="reveal reveal-delay-4 rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900">
+            <span class="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 text-xl font-extrabold text-white">LP</span>
+            <p class="mt-4 text-sm font-bold text-slate-900 dark:text-white">Laras Pertiwi</p>
+            <p class="mt-0.5 text-xs text-slate-500 dark:text-slate-500">Community &amp; Partnership</p>
+            <div class="mt-3 flex justify-center gap-2 text-slate-400">
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="github" class="h-4 w-4"></i></a>
+              <a href="#" class="transition hover:text-indigo-600 dark:hover:text-indigo-400"><i data-lucide="linkedin" class="h-4 w-4"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== FAQ ==================== -->
+    <section id="faq" class="border-y border-slate-200 bg-white py-20 dark:border-slate-800 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal text-center">
+          <span class="inline-flex items-center gap-2 rounded-full bg-slate-100 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-slate-700 ring-1 ring-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:ring-slate-700">
+            <i data-lucide="help-circle" class="h-3.5 w-3.5"></i> Pertanyaan Umum
+          </span>
+          <h2 class="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl dark:text-white">
+            Hal yang sering ditanyakan
+          </h2>
+          <p class="mt-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+            Tidak menemukan jawaban Anda? Hubungi kami di <a href="mailto:contact@eduaccess.org" class="font-semibold text-indigo-600 hover:underline dark:text-indigo-400">contact@eduaccess.org</a>.
+          </p>
+        </div>
+
+        <div class="reveal mt-12 space-y-3">
+          <!-- FAQ item -->
+          <div class="faq-item overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <button type="button" class="faq-toggle flex w-full items-center justify-between gap-4 p-5 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <span class="text-sm font-bold text-slate-900 dark:text-white">Apakah EduAccess AI benar-benar gratis?</span>
+              <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-500 transition dark:bg-slate-800 dark:text-slate-400">
+                <i data-lucide="plus" class="h-4 w-4"></i>
+              </span>
+            </button>
+            <div class="faq-content"><div>
+              <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Ya, 100% gratis dan akan selalu gratis. Kami adalah yayasan nirlaba yang didanai oleh hibah,
+                donasi, dan kontribusi relawan. Tidak ada paket premium tersembunyi, tidak ada iklan, dan kami
+                tidak menjual data pengguna.
+              </p>
+            </div></div>
+          </div>
+
+          <div class="faq-item overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <button type="button" class="faq-toggle flex w-full items-center justify-between gap-4 p-5 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <span class="text-sm font-bold text-slate-900 dark:text-white">Bagaimana Anda melindungi data pengguna, terutama anak-anak?</span>
+              <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-500 transition dark:bg-slate-800 dark:text-slate-400">
+                <i data-lucide="plus" class="h-4 w-4"></i>
+              </span>
+            </button>
+            <div class="faq-content"><div>
+              <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Kami menerapkan prinsip <em>data minimization</em>: kami tidak meminta registrasi, tidak menyimpan
+                riwayat input, dan tidak menggunakan pelacak pihak ketiga. Untuk institusi pendidikan yang
+                bermitra, kami menyediakan perjanjian pemrosesan data (DPA) yang sesuai dengan GDPR dan UU PDP.
+              </p>
+            </div></div>
+          </div>
+
+          <div class="faq-item overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <button type="button" class="faq-toggle flex w-full items-center justify-between gap-4 p-5 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <span class="text-sm font-bold text-slate-900 dark:text-white">Model AI apa yang Anda gunakan?</span>
+              <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-500 transition dark:bg-slate-800 dark:text-slate-400">
+                <i data-lucide="plus" class="h-4 w-4"></i>
+              </span>
+            </button>
+            <div class="faq-content"><div>
+              <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Kami menggunakan kombinasi model terbuka yang kami fine-tune sendiri (seri
+                <span class="font-mono text-xs">eduaccess-open-1</span>) dengan lapisan evaluasi keamanan internal.
+                Seluruh bobot model, dataset pelatihan, dan kartu model dipublikasikan di repositori kami.
+              </p>
+            </div></div>
+          </div>
+
+          <div class="faq-item overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <button type="button" class="faq-toggle flex w-full items-center justify-between gap-4 p-5 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <span class="text-sm font-bold text-slate-900 dark:text-white">Bagaimana saya bisa berkontribusi?</span>
+              <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-500 transition dark:bg-slate-800 dark:text-slate-400">
+                <i data-lucide="plus" class="h-4 w-4"></i>
+              </span>
+            </button>
+            <div class="faq-content"><div>
+              <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Ada banyak cara: kirim pull request ke repositori GitHub kami, bantu terjemahkan antarmuka,
+                uji aksesibilitas bersama komunitas disabilitas, atau donasikan waktu Anda sebagai mentor.
+                Kunjungi halaman <a href="#contact" class="font-semibold text-indigo-600 hover:underline dark:text-indigo-400">Contact</a>
+                untuk memulai.
+              </p>
+            </div></div>
+          </div>
+
+          <div class="faq-item overflow-hidden rounded-2xl border border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-900">
+            <button type="button" class="faq-toggle flex w-full items-center justify-between gap-4 p-5 text-left transition hover:bg-slate-50 dark:hover:bg-slate-800/50">
+              <span class="text-sm font-bold text-slate-900 dark:text-white">Apakah tersedia API untuk sekolah atau NGO?</span>
+              <span class="faq-icon grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-slate-100 text-slate-500 transition dark:bg-slate-800 dark:text-slate-400">
+                <i data-lucide="plus" class="h-4 w-4"></i>
+              </span>
+            </button>
+            <div class="faq-content"><div>
+              <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Tentu. API publik kami gratis untuk institusi pendidikan dan organisasi nirlaba, dengan kuota
+                yang wajar. Untuk kebutuhan skala besar atau integrasi khusus, hubungi kami untuk kemitraan.
+              </p>
+            </div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== NEWSLETTER ==================== -->
+    <section class="bg-slate-50 py-20 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 sm:p-12 dark:border-slate-800 dark:bg-slate-900 dark:shadow-black/30">
+          <div class="grid items-center gap-10 lg:grid-cols-2">
+            <div>
+              <span class="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-indigo-700 ring-1 ring-indigo-100 dark:bg-indigo-500/10 dark:text-indigo-300 dark:ring-indigo-500/20">
+                <i data-lucide="send" class="h-3.5 w-3.5"></i> Newsletter
+              </span>
+              <h2 class="mt-4 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl dark:text-white">
+                Dapatkan kabar rilis &amp; riset terbaru
+              </h2>
+              <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                Satu email per bulan. Tanpa spam, tanpa iklan, bisa berhenti berlangganan kapan saja.
+                Kami hanya mengirimkan hal-hal yang benar-benar bermanfaat.
+              </p>
+              <ul class="mt-5 space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500"></i> Update model &amp; API</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500"></i> Publikasi riset AI Safety</li>
+                <li class="flex items-center gap-2"><i data-lucide="check-circle-2" class="h-4 w-4 text-emerald-500"></i> Peluang kolaborasi komunitas</li>
+              </ul>
+            </div>
+
+            <form id="newsletterForm" class="rounded-2xl border border-slate-200 bg-slate-50/60 p-6 dark:border-slate-800 dark:bg-slate-950/50">
+              <label for="newsletterEmail" class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Alamat email</label>
+              <input id="newsletterEmail" type="email" required placeholder="nama@sekolah.sch.id"
+                class="mt-2 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 placeholder:text-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-4 focus:ring-indigo-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:placeholder:text-slate-500 dark:focus:border-indigo-500 dark:focus:ring-indigo-500/20" />
+
+              <label class="mt-4 flex items-start gap-2.5 text-xs text-slate-500 dark:text-slate-400">
+                <input type="checkbox" required class="mt-0.5 h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500 dark:border-slate-700 dark:bg-slate-900" />
+                <span>Saya setuju menerima email dari EduAccess AI Foundation dan memahami kebijakan privasi kami.</span>
+              </label>
+
+              <button type="submit"
+                class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/25 transition hover:-translate-y-0.5 hover:bg-indigo-700">
+                <i data-lucide="mail" class="h-4 w-4"></i>
+                Berlangganan
+              </button>
+              <p id="newsletterMsg" class="mt-3 hidden text-xs font-semibold text-emerald-600 dark:text-emerald-400"></p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==================== CTA / CONTACT ==================== -->
+    <section id="contact" class="border-t border-slate-200 bg-white py-20 dark:border-slate-800 dark:bg-slate-950 lg:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="reveal relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-700 via-violet-700 to-indigo-800 px-6 py-14 text-center shadow-2xl shadow-indigo-500/30 sm:px-12 lg:px-16">
+          <div class="pointer-events-none absolute inset-0 opacity-30">
+            <div class="absolute -left-10 -top-16 h-64 w-64 animate-blob rounded-full bg-white/20 blur-3xl"></div>
+            <div class="absolute -bottom-20 right-0 h-64 w-64 animate-blob rounded-full bg-sky-300/30 blur-3xl" style="animation-delay:-5s"></div>
+          </div>
+
+          <div class="relative mx-auto max-w-2xl">
+            <span class="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-indigo-100 ring-1 ring-white/20">
+              <i data-lucide="hand-heart" class="h-3.5 w-3.5"></i> Bergabunglah
+            </span>
+            <h2 class="mt-5 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Bantu kami membuat AI benar-benar inklusif
+            </h2>
+            <p class="mt-4 text-base leading-relaxed text-indigo-100">
+              Baik Anda seorang pengembang, pendidik, peneliti, atau organisasi yang ingin bermitra —
+              ada tempat untuk Anda di komunitas ini.
+            </p>
+
+            <div class="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+              <a href="mailto:contact@eduaccess.org"
+                 class="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-sm font-bold text-indigo-700 shadow-xl transition hover:-translate-y-0.5 hover:bg-indigo-50 sm:w-auto">
+                <i data-lucide="mail" class="h-[18px] w-[18px]"></i>
+                contact@eduaccess.org
+              </a>
+              <a href="#opensource"
+                 class="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/10 px-6 py-3.5 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20 sm:w-auto">
+                <i data-lucide="github" class="h-[18px] w-[18px]"></i>
+                Lihat Repositori
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
+    <div class="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+      <div class="grid gap-10 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <a href="#home" class="flex items-center gap-2.5">
+            <span class="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-indigo-600 via-violet-600 to-indigo-500 shadow-lg shadow-indigo-500/25">
+              <i data-lucide="book-open" class="h-5 w-5 text-white"></i>
+            </span>
+            <span class="flex flex-col leading-none">
+              <span class="text-[17px] font-extrabold tracking-tight text-slate-900 dark:text-white">
+                EduAccess<span class="text-indigo-600 dark:text-indigo-400"> AI</span>
+              </span>
+              <span class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
+                Non-Profit&nbsp;·&nbsp;.org
+              </span>
+            </span>
+          </a>
+
+          <p class="mt-5 max-w-sm text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            Yayasan nirlaba yang membangun teknologi AI pendidikan dan aksesibilitas yang terbuka,
+            aman, dan gratis untuk semua.
+          </p>
+
+          <div class="mt-6 flex items-center gap-2.5">
+            <a href="#opensource" aria-label="GitHub" class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-300 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-indigo-700 dark:hover:text-indigo-400">
+              <i data-lucide="github" class="h-4 w-4"></i>
+            </a>
+            <a href="#contact" aria-label="Email" class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-300 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-indigo-700 dark:hover:text-indigo-400">
+              <i data-lucide="mail" class="h-4 w-4"></i>
+            </a>
+            <a href="#contact" aria-label="LinkedIn" class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-300 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-indigo-700 dark:hover:text-indigo-400">
+              <i data-lucide="linkedin" class="h-4 w-4"></i>
+            </a>
+            <a href="#contact" aria-label="Discord" class="grid h-9 w-9 place-items-center rounded-lg border border-slate-200 bg-white text-slate-500 transition hover:border-indigo-300 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400 dark:hover:border-indigo-700 dark:hover:text-indigo-400">
+              <i data-lucide="messages-square" class="h-4 w-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-2">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Platform</h3>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#demo" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Live Demo</a></li>
+            <li><a href="#features" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Fitur</a></li>
+            <li><a href="#opensource" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">API Publik</a></li>
+            <li><a href="#opensource" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Dokumentasi</a></li>
+            <li><a href="#opensource" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Status Layanan</a></li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-2">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Organisasi</h3>
+          <ul class="mt-4 space-y-2.5 text-sm">
+            <li><a href="#about" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Tentang Kami</a></li>
+            <li><a href="#contact" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Laporan Tahunan</a></li>
+            <li><a href="#contact" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">AI Safety Charter</a></li>
+            <li><a href="#contact" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Kebijakan Privasi</a></li>
+            <li><a href="#contact" class="text-slate-600 transition hover:text-indigo-600 dark:text-slate-400 dark:hover:text-indigo-400">Syarat &amp; Ketentuan Nirlaba</a></li>
+          </ul>
+        </div>
+
+        <div class="lg:col-span-4">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">Kontak Resmi</h3>
+          <ul class="mt-4 space-y-3 text-sm">
+            <li class="flex items-start gap-3">
+              <i data-lucide="mail" class="mt-0.5 h-4 w-4 shrink-0 text-indigo-500"></i>
+              <a href="mailto:contact@eduaccess.org" class="font-medium text-slate-700 transition hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400">contact@eduaccess.org</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="shield-question" class="mt-0.5 h-4 w-4 shrink-0 text-indigo-500"></i>
+              <a href="mailto:safety@eduaccess.org" class="font-medium text-slate-700 transition hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400">safety@eduaccess.org</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="building-2" class="mt-0.5 h-4 w-4 shrink-0 text-indigo-500"></i>
+              <span class="text-slate-600 dark:text-slate-400">EduAccess AI Foundation · Registered 501(c)(3) non-profit</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <i data-lucide="map-pin" class="mt-0.5 h-4 w-4 shrink-0 text-indigo-500"></i>
+              <span class="text-slate-600 dark:text-slate-400">Remote-first · Jakarta, Indonesia</span>
+            </li>
+          </ul>
+
+          <div class="mt-6 rounded-xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-500/20 dark:bg-emerald-500/10">
+            <p class="flex items-start gap-2 text-xs leading-relaxed text-emerald-800 dark:text-emerald-300">
+              <i data-lucide="badge-check" class="mt-0.5 h-4 w-4 shrink-0"></i>
+              <span><strong class="font-bold">100% non-profit.</strong> Tidak ada iklan, tidak ada penjualan data, tidak ada investor yang menuntut keuntungan.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-8 sm:flex-row dark:border-slate-800">
+        <p class="text-center text-xs text-slate-500 sm:text-left dark:text-slate-500">
+          © <span id="year">2026</span> EduAccess AI Foundation (.org). All rights reserved.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-slate-500 dark:text-slate-500">
+          <a href="#contact" class="transition hover:text-indigo-600 dark:hover:text-indigo-400">Privacy Policy</a>
+          <span class="hidden h-1 w-1 rounded-full bg-slate-300 sm:block dark:bg-slate-700"></span>
+          <a href="#contact" class="transition hover:text-indigo-600 dark:hover:text-indigo-400">Terms of Service</a>
+          <span class="hidden h-1 w-1 rounded-full bg-slate-300 sm:block dark:bg-slate-700"></span>
+          <a href="#contact" class="transition hover:text-indigo-600 dark:hover:text-indigo-400">Non-Profit Disclosure</a>
+          <span class="hidden h-1 w-1 rounded-full bg-slate-300 sm:block dark:bg-slate-700"></span>
+          <span class="inline-flex items-center gap-1.5">
+            <i data-lucide="heart" class="h-3.5 w-3.5 text-rose-500"></i>
+            Built by the community
+          </span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==================== BACK TO TOP ==================== -->
+  <button id="backToTop" type="button" aria-label="Kembali ke atas"
+    class="btt-hidden fixed bottom-6 right-6 z-40 grid h-11 w-11 place-items-center rounded-xl bg-indigo-600 text-white shadow-xl shadow-indigo-600/30 transition-all duration-300 hover:-translate-y-0.5 hover:bg-indigo-700">
+    <i data-lucide="arrow-up" class="h-5 w-5"></i>
+  </button>
+
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    /* =========================================================
+       0. ICONS
+    ========================================================= */
+    function renderIcons() {
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
+    }
+    renderIcons();
+
+    /* =========================================================
+       1. THEME (DARK MODE)
+    ========================================================= */
+    const html = document.documentElement;
+    const themeBtn = document.getElementById('themeToggle');
+    const themeBtnMobile = document.getElementById('themeToggleMobile');
+
+    function applyTheme(isDark) {
+      html.classList.toggle('dark', isDark);
+      document.querySelectorAll('.theme-icon-dark').forEach(el => el.classList.toggle('hidden', isDark));
+      document.querySelectorAll('.theme-icon-light').forEach(el => el.classList.toggle('hidden', !isDark));
+    }
+
+    // initial: stored > system
+    const storedTheme = localStorage.getItem('eduaccess-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(storedTheme ? storedTheme === 'dark' : prefersDark);
+
+    function toggleTheme() {
+      const isDark = !html.classList.contains('dark');
+      applyTheme(isDark);
+      localStorage.setItem('eduaccess-theme', isDark ? 'dark' : 'light');
+    }
+    themeBtn && themeBtn.addEventListener('click', toggleTheme);
+    themeBtnMobile && themeBtnMobile.addEventListener('click', toggleTheme);
+
+    /* =========================================================
+       2. ANNOUNCEMENT BAR
+    ========================================================= */
+    const closeAnnounce = document.getElementById('closeAnnounce');
+    const announcement = document.getElementById('announcement');
+    if (closeAnnounce) {
+      closeAnnounce.addEventListener('click', () => {
+        announcement.style.height = announcement.offsetHeight + 'px';
+        requestAnimationFrame(() => {
+          announcement.style.transition = 'height .3s ease, opacity .3s ease, padding .3s ease';
+          announcement.style.height = '0';
+          announcement.style.opacity = '0';
+          announcement.style.overflow = 'hidden';
+          setTimeout(() => announcement.remove(), 320);
+        });
+      });
+    }
+
+    /* =========================================================
+       3. MOBILE MENU
+    ========================================================= */
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    menuBtn.addEventListener('click', () => {
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.setAttribute('aria-expanded', String(!isOpen));
+      menuBtn.innerHTML = !isOpen
+        ? '<i data-lucide="x" class="h-5 w-5"></i>'
+        : '<i data-lucide="menu" class="h-5 w-5"></i>';
+      renderIcons();
+    });
+
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.innerHTML = '<i data-lucide="menu" class="h-5 w-5"></i>';
+        renderIcons();
+      });
+    });
+
+    /* =========================================================
+       4. SCROLL PROGRESS + BACK TO TOP + NAV SHADOW
+    ========================================================= */
+    const scrollProgress = document.getElementById('scrollProgress');
+    const backToTop = document.getElementById('backToTop');
+    const navbar = document.getElementById('navbar');
+
+    function onScroll() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      scrollProgress.style.width = pct + '%';
+
+      if (scrollTop > 400) {
+        backToTop.classList.remove('btt-hidden');
+        backToTop.classList.add('btt-shown');
+      } else {
+        backToTop.classList.add('btt-hidden');
+        backToTop.classList.remove('btt-shown');
+      }
+
+      // nav shadow
+      if (scrollTop > 8) {
+        navbar.classList.add('shadow-sm');
+      } else {
+        navbar.classList.remove('shadow-sm');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* =========================================================
+       5. SMOOTH ANCHOR SCROLL
+    ========================================================= */
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
+        e.preventDefault();
+        const offset = 84;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      });
+    });
+
+    /* =========================================================
+       6. REVEAL ON SCROLL
+    ========================================================= */
+    const revealEls = document.querySelectorAll('.reveal');
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      revealEls.forEach(el => io.observe(el));
+    } else {
+      revealEls.forEach(el => el.classList.add('is-visible'));
+    }
+
+    /* =========================================================
+       7. ANIMATED COUNTERS
+    ========================================================= */
+    const counters = document.querySelectorAll('.counter');
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target, 10) || 0;
+      const duration = 1500;
+      const start = performance.now();
+      const startVal = 0;
+
+      function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        const value = Math.floor(startVal + (target - startVal) * eased);
+        el.textContent = value.toLocaleString('id-ID');
+        if (p < 1) requestAnimationFrame(tick);
+        else el.textContent = target.toLocaleString('id-ID');
+      }
+      requestAnimationFrame(tick);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const cio = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounter(entry.target);
+            cio.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(c => cio.observe(c));
+    } else {
+      counters.forEach(animateCounter);
+    }
+
+    /* =========================================================
+       8. LIVE DEMO
+    ========================================================= */
+    const inputEl = document.getElementById('demoInput');
+    const charCountEl = document.getElementById('charCount');
+    const processBtn = document.getElementById('processBtn');
+    const processLabel = document.getElementById('processLabel');
+    const outputBox = document.getElementById('outputBox');
+    const outputBadge = document.getElementById('outputBadge');
+    const clearBtn = document.getElementById('clearBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const micBtn = document.getElementById('micBtn');
+    const uploadBtn = document.getElementById('uploadBtn');
+    const historyWrap = document.getElementById('historyWrap');
+    const historyList = document.getElementById('historyList');
+
+    let currentMode = 'ringkas';
+    let lastResultText = '';
+    const history = [];
+
+    const MODE_LABELS = {
+      ringkas:   { label: 'Ringkasan',         icon: 'align-left'  },
+      sederhana: { label: 'Bahasa Sederhana',  icon: 'baby'        },
+      poin:      { label: 'Poin Penting',      icon: 'list-checks' },
+    };
+
+    /* --- Mode button styles --- */
+    const modeButtons = document.querySelectorAll('.mode-btn');
+    const ACTIVE_CLASSES = ['border-indigo-500', 'bg-indigo-50', 'text-indigo-700', 'ring-1', 'ring-indigo-500', 'shadow-sm', 'dark:border-indigo-500', 'dark:bg-indigo-500/10', 'dark:text-indigo-300'];
+    const INACTIVE_CLASSES = ['border-slate-200', 'bg-white', 'text-slate-600', 'hover:border-indigo-300', 'hover:bg-slate-50', 'dark:border-slate-700', 'dark:bg-slate-800', 'dark:text-slate-300', 'dark:hover:border-indigo-600', 'dark:hover:bg-indigo-500/5'];
+
+    function applyModeStyles(activeBtn) {
+      modeButtons.forEach(btn => {
+        btn.classList.remove(...ACTIVE_CLASSES);
+        btn.classList.add(...INACTIVE_CLASSES);
+      });
+      activeBtn.classList.remove(...INACTIVE_CLASSES);
+      activeBtn.classList.add(...ACTIVE_CLASSES);
+    }
+    modeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentMode = btn.dataset.mode;
+        applyModeStyles(btn);
+      });
+    });
+    applyModeStyles(document.querySelector('[data-mode="ringkas"]'));
+
+    /* --- Character counter --- */
+    function updateCount() {
+      const v = inputEl.value;
+      const chars = v.length;
+      const words = v.trim() ? v.trim().split(/\s+/).length : 0;
+      charCountEl.textContent = `${chars.toLocaleString('id-ID')} karakter · ${words.toLocaleString('id-ID')} kata`;
+      if (chars > 5000) {
+        inputEl.value = v.slice(0, 5000);
+        updateCount();
+      }
+    }
+    inputEl.addEventListener('input', updateCount);
+    updateCount();
+
+    /* --- Sample chips --- */
+    const SAMPLES = {
+      fotosintesis: "Fotosintesis adalah proses biokimia yang dilakukan oleh tumbuhan hijau, alga, dan beberapa bakteri untuk mengubah energi cahaya matahari menjadi energi kimia dalam bentuk glukosa. Proses ini terjadi di dalam kloroplas, tepatnya pada organel yang mengandung pigmen klorofil. Fotosintesis terdiri dari dua tahap utama: reaksi terang yang berlangsung di membran tilakoid dan siklus Calvin yang berlangsung di stroma. Pada reaksi terang, energi cahaya digunakan untuk memecah molekul air menjadi oksigen, ion hidrogen, dan elektron, sekaligus menghasilkan ATP dan NADPH. Selanjutnya, siklus Calvin menggunakan ATP dan NADPH untuk mengikat karbon dioksida dan membentuk glukosa melalui serangkaian reaksi enzimatik.",
+      sejarah: "Proklamasi Kemerdekaan Indonesia dibacakan oleh Soekarno pada tanggal 17 Agustus 1945 di Jalan Pegangsaan Timur Nomor 56, Jakarta. Peristiwa ini menandai berakhirnya masa penjajahan di Indonesia dan lahirnya negara Republik Indonesia yang merdeka. Naskah proklamasi disusun oleh Soekarno, Mohammad Hatta, dan Ahmad Soebardjo di rumah Laksamana Maeda. Sebelum pembacaan, terjadi perdebatan sengit antara golongan tua dan golongan muda mengenai waktu pelaksanaan proklamasi, yang berpuncak pada peristiwa Rengasdengklok. Setelah naskah disepakati, teks proklamasi diketik oleh Sayuti Melik dan ditandatangani oleh Soekarno serta Mohammad Hatta atas nama bangsa Indonesia.",
+      matematika: "Teorema Pythagoras menyatakan bahwa dalam segitiga siku-siku, kuadrat panjang sisi miring sama dengan jumlah kuadrat panjang kedua sisi tegaknya. Secara matematis, jika sisi miring dilambangkan dengan c dan kedua sisi tegak dilambangkan dengan a dan b, maka berlaku rumus a kuadrat ditambah b kuadrat sama dengan c kuadrat. Teorema ini dinamai berdasarkan filsuf dan matematikawan Yunani kuno, Pythagoras. Penerapan teorema ini sangat luas, mulai dari menghitung jarak diagonal pada bangunan, menentukan panjang tangga yang dibutuhkan untuk mencapai ketinggian tertentu, hingga navigasi dan grafika komputer. Kebalikan dari teorema ini juga berlaku: jika kuadrat sisi terpanjang sama dengan jumlah kuadrat dua sisi lainnya, maka segitiga tersebut pasti siku-siku."
+    };
+
+    document.querySelectorAll('.sample-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const key = chip.dataset.sample;
+        if (SAMPLES[key]) {
+          inputEl.value = SAMPLES[key];
+          updateCount();
+          inputEl.focus();
+        }
+      });
+    });
+
+    /* --- Clear --- */
+    clearBtn.addEventListener('click', () => {
+      inputEl.value = '';
+      updateCount();
+      renderEmptyState();
+      outputBadge.classList.add('hidden');
+      copyBtn.disabled = true;
+      downloadBtn.disabled = true;
+      lastResultText = '';
+      inputEl.focus();
+    });
+
+    /* --- Mic / Upload simulation --- */
+    micBtn.addEventListener('click', () => {
+      micBtn.classList.add('animate-pulse', 'text-indigo-600');
+      setTimeout(() => {
+        micBtn.classList.remove('animate-pulse', 'text-indigo-600');
+        inputEl.value = "Ini adalah hasil simulasi input suara. Dalam versi produksi, fitur ini menggunakan Web Speech API untuk mengubah ucapan menjadi teks secara real-time, sehingga pelajar dengan kesulitan mengetik tetap bisa menggunakan asisten ini.";
+        updateCount();
+      }, 1200);
+    });
+
+    uploadBtn.addEventListener('click', () => {
+      uploadBtn.classList.add('animate-pulse', 'text-indigo-600');
+      setTimeout(() => {
+        uploadBtn.classList.remove('animate-pulse', 'text-indigo-600');
+        inputEl.value = "Hasil simulasi unggah dokumen. Pada versi lengkap, Anda dapat mengunggah file PDF, DOCX, atau TXT dan sistem akan mengekstrak teksnya secara otomatis sebelum diproses oleh AI. Semua pemrosesan dilakukan di perangkat Anda untuk menjaga privasi.";
+        updateCount();
+      }, 1200);
+    });
+
+    /* --- Empty state --- */
+    function renderEmptyState() {
+      outputBox.innerHTML = `
+        <div class="flex h-full min-h-[19rem] flex-col items-center justify-center text-center">
+          <div class="grid h-14 w-14 place-items-center rounded-2xl bg-slate-100 text-slate-400 dark:bg-slate-800 dark:text-slate-500">
+            <i data-lucide="wand-sparkles" class="h-7 w-7"></i>
+          </div>
+          <p class="mt-4 text-sm font-semibold text-slate-600 dark:text-slate-300">Belum ada hasil</p>
+          <p class="mt-1 max-w-xs text-xs leading-relaxed text-slate-400 dark:text-slate-500">
+            Tulis atau tempel materi pelajaran di panel kiri, pilih mode, lalu tekan
+            <span class="font-semibold text-slate-500 dark:text-slate-400">"Proses dengan AI"</span>.
+          </p>
+        </div>`;
+      renderIcons();
+    }
+
+    /* --- Loading state --- */
+    function renderLoadingState() {
+      outputBox.innerHTML = `
+        <div class="flex h-full min-h-[19rem] flex-col items-center justify-center text-center">
+          <div class="spinner h-12 w-12"></div>
+          <p class="mt-5 text-sm font-semibold text-slate-700 dark:text-slate-200">Memproses materi Anda…</p>
+          <p class="mt-1 text-xs text-slate-400 dark:text-slate-500">Model sedang menganalisis teks dan menyusun hasil.</p>
+          <div class="mt-6 w-full max-w-xs space-y-2">
+            <div class="shimmer h-2 w-full rounded-full bg-slate-200 dark:bg-slate-800"></div>
+            <div class="shimmer h-2 w-10/12 rounded-full bg-slate-200 dark:bg-slate-800"></div>
+            <div class="shimmer h-2 w-7/12 rounded-full bg-slate-200 dark:bg-slate-800"></div>
+          </div>
+        </div>`;
+      renderIcons();
+    }
+
+    function escapeHTML(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    /* --- Build dummy results --- */
+    function buildResult(mode, rawText) {
+      const clean = rawText.trim().replace(/\s+/g, ' ');
+      const sentences = clean.split(/(?<=[.!?])\s+/).map(s => s.trim()).filter(Boolean);
+      const words = clean.split(/\s+/).filter(Boolean);
+      const totalWords = words.length;
+      const safeSentences = sentences.length ? sentences : [clean];
+      const firstChunk = (n) => safeSentences.slice(0, n).join(' ');
+
+      if (mode === 'ringkas') {
+        const summary = safeSentences.length > 1
+          ? firstChunk(2)
+          : words.slice(0, Math.min(28, totalWords)).join(' ') + (totalWords > 28 ? '…' : '');
+        return {
+          text: summary,
+          html: `
+            <div class="space-y-4">
+              <p class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">${escapeHTML(summary)}</p>
+              <div class="rounded-xl border border-slate-200 bg-slate-50/70 p-4 dark:border-slate-700 dark:bg-slate-950/50">
+                <p class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                  <i data-lucide="target" class="h-3.5 w-3.5 text-indigo-500"></i> Inti Gagasan
+                </p>
+                <p class="mt-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                  ${escapeHTML(firstChunk(1) || clean)}
+                </p>
+              </div>
+              <p class="text-xs leading-relaxed text-slate-500 dark:text-slate-500">
+                <span class="font-semibold text-slate-600 dark:text-slate-400">Catatan:</span>
+                ringkasan ini mempertahankan istilah kunci dan menghilangkan pengulangan.
+              </p>
+            </div>`
+        };
+      }
+
+      if (mode === 'sederhana') {
+        const simplified = safeSentences.slice(0, 3).map(s => {
+          const parts = s.split(/\s+/);
+          const short = parts.slice(0, 16).join(' ');
+          return short + (parts.length > 16 ? '…' : '');
+        });
+        return {
+          text: simplified.join('\n'),
+          html: `
+            <div class="space-y-4">
+              <div class="rounded-xl border border-violet-200 bg-violet-50/60 p-4 dark:border-violet-500/20 dark:bg-violet-500/10">
+                <p class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-violet-700 dark:text-violet-300">
+                  <i data-lucide="lightbulb" class="h-3.5 w-3.5"></i> Versi Bahasa Mudah
+                </p>
+                <p class="mt-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                  ${escapeHTML(simplified[0] || clean)}
+                </p>
+              </div>
+              <div class="space-y-2.5">
+                ${simplified.slice(1).map(s => `
+                  <div class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5 dark:border-slate-700 dark:bg-slate-950/40">
+                    <span class="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-violet-100 text-[10px] font-bold text-violet-700 dark:bg-violet-500/20 dark:text-violet-300">✓</span>
+                    <p class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">${escapeHTML(s)}</p>
+                  </div>`).join('')}
+              </div>
+              <p class="text-xs leading-relaxed text-slate-500 dark:text-slate-500">
+                Kalimat dipecah menjadi bagian pendek, istilah teknis diganti dengan padanan yang lebih umum.
+              </p>
+            </div>`
+        };
+      }
+
+      /* poin */
+      let bullets = safeSentences.slice(0, 4).map(s => s.split(/\s+/).slice(0, 18).join(' '));
+      if (bullets.length < 2) {
+        const chunkSize = Math.max(6, Math.ceil(totalWords / 3));
+        bullets = [];
+        for (let i = 0; i < totalWords && bullets.length < 3; i += chunkSize) {
+          bullets.push(words.slice(i, i + chunkSize).join(' '));
+        }
+      }
+      return {
+        text: bullets.map((b, i) => `${i + 1}. ${b}`).join('\n'),
+        html: `
+          <div class="space-y-4">
+            <p class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+              <i data-lucide="list-checks" class="h-3.5 w-3.5 text-indigo-500"></i> Poin-Poin Utama
+            </p>
+            <ul class="space-y-2.5">
+              ${bullets.map((b, i) => `
+                <li class="flex items-start gap-3 rounded-xl border border-slate-200 bg-white p-3.5 transition hover:border-indigo-300 hover:bg-indigo-50/40 dark:border-slate-700 dark:bg-slate-950/40 dark:hover:border-indigo-600 dark:hover:bg-indigo-500/5">
+                  <span class="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-lg bg-indigo-600 text-[11px] font-bold text-white">${i + 1}</span>
+                  <span class="text-sm leading-relaxed text-slate-700 dark:text-slate-300">${escapeHTML(b)}</span>
+                </li>`).join('')}
+            </ul>
+            <div class="rounded-xl border border-amber-200 bg-amber-50/70 p-4 dark:border-amber-500/20 dark:bg-amber-500/10">
+              <p class="flex items-start gap-2 text-xs leading-relaxed text-amber-900 dark:text-amber-300">
+                <i data-lucide="info" class="mt-0.5 h-3.5 w-3.5 shrink-0"></i>
+                <span>Gunakan poin-poin ini sebagai kerangka catatan atau bahan kuis cepat.</span>
+              </p>
+            </div>
+          </div>`
+      };
+    }
+
+    function renderResult(mode, text) {
+      const result = buildResult(mode, text);
+      const meta = MODE_LABELS[mode];
+      const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+      lastResultText = result.text;
+
+      outputBox.innerHTML = `
+        <div class="animate-fadeUp space-y-4">
+          <div class="flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+            <i data-lucide="${meta.icon}" class="h-4 w-4"></i>
+            Hasil · ${meta.label}
+          </div>
+          ${result.html}
+          <div class="flex flex-wrap items-center gap-2 border-t border-slate-100 pt-4 text-[11px] text-slate-500 dark:border-slate-800 dark:text-slate-500">
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 font-semibold text-emerald-700 ring-1 ring-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:ring-emerald-500/20">
+              <i data-lucide="shield-check" class="h-3 w-3"></i> Safety Checked
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-slate-100 px-2.5 py-1 font-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+              <i data-lucide="type" class="h-3 w-3"></i> ${wordCount} kata diproses
+            </span>
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-sky-50 px-2.5 py-1 font-semibold text-sky-700 ring-1 ring-sky-100 dark:bg-sky-500/10 dark:text-sky-400 dark:ring-sky-500/20">
+              <i data-lucide="eye-off" class="h-3 w-3"></i> No Data Stored
+            </span>
+          </div>
+        </div>`;
+
+      outputBadge.textContent = meta.label;
+      outputBadge.classList.remove('hidden');
+      copyBtn.disabled = false;
+      downloadBtn.disabled = false;
+      renderIcons();
+
+      // add to history
+      history.unshift({ mode, text: result.text, time: new Date() });
+      history.splice(5);
+      renderHistory();
+    }
+
+    function renderHistory() {
+      if (!history.length) {
+        historyWrap.classList.add('hidden');
+        return;
+      }
+      historyWrap.classList.remove('hidden');
+      historyList.innerHTML = history.map((h, i) => `
+        <button type="button" data-idx="${i}" class="history-chip inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-2.5 py-1 text-[10px] font-semibold text-slate-600 transition hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-indigo-600 dark:hover:bg-indigo-500/10">
+          <i data-lucide="${MODE_LABELS[h.mode].icon}" class="h-3 w-3"></i>
+          ${MODE_LABELS[h.mode].label}
+        </button>
+      `).join('');
+      renderIcons();
+
+      historyList.querySelectorAll('.history-chip').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = history[parseInt(btn.dataset.idx, 10)];
+          if (item) {
+            inputEl.value = SAMPLES[Object.keys(SAMPLES).find(k => SAMPLES[k] === item.text)] || item.text;
+          }
+        });
+      });
+    }
+
+    /* --- Process button --- */
+    processBtn.addEventListener('click', () => {
+      const text = inputEl.value.trim();
+      if (text.length < 15) {
+        outputBadge.classList.add('hidden');
+        outputBox.innerHTML = `
+          <div class="flex h-full min-h-[19rem] flex-col items-center justify-center text-center">
+            <div class="grid h-14 w-14 place-items-center rounded-2xl bg-amber-100 text-amber-600 dark:bg-amber-500/20 dark:text-amber-400">
+              <i data-lucide="alert-triangle" class="h-7 w-7"></i>
+            </div>
+            <p class="mt-4 text-sm font-semibold text-slate-700 dark:text-slate-200">Materi terlalu pendek</p>
+            <p class="mt-1 max-w-xs text-xs leading-relaxed text-slate-400 dark:text-slate-500">
+              Masukkan minimal 15 karakter agar AI dapat menghasilkan output yang bermakna.
+            </p>
+          </div>`;
+        renderIcons();
+        inputEl.focus();
+        return;
+      }
+
+      processBtn.disabled = true;
+      processLabel.textContent = 'Memproses…';
+      outputBadge.classList.add('hidden');
+      copyBtn.disabled = true;
+      downloadBtn.disabled = true;
+      renderLoadingState();
+
+      setTimeout(() => {
+        renderResult(currentMode, text);
+        processBtn.disabled = false;
+        processLabel.textContent = 'Proses dengan AI';
+      }, 1000);
+    });
+
+    /* --- Copy / Download --- */
+    copyBtn.addEventListener('click', async () => {
+      if (!lastResultText) return;
+      try {
+        await navigator.clipboard.writeText(lastResultText);
+        const original = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i data-lucide="check" class="h-3.5 w-3.5 text-emerald-500"></i>';
+        renderIcons();
+        setTimeout(() => {
+          copyBtn.innerHTML = original;
+          renderIcons();
+        }, 1400);
+      } catch (e) {
+        console.warn('Copy failed', e);
+      }
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      if (!lastResultText) return;
+      const header = `EduAccess AI — ${MODE_LABELS[currentMode].label}\n` + '='.repeat(48) + '\n\n';
+      const footer = '\n\n' + '='.repeat(48) + '\nGenerated locally at eduaccess.org — non-profit, open source.\nNo data was stored or transmitted.';
+      const blob = new Blob([header + lastResultText + footer], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `eduaccess-${currentMode}-${Date.now()}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
+
+    /* --- Copy code block --- */
+    const copyCodeBtn = document.getElementById('copyCodeBtn');
+    const codeBlock = document.getElementById('codeBlock');
+    if (copyCodeBtn && codeBlock) {
+      copyCodeBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(codeBlock.innerText);
+          copyCodeBtn.textContent = 'Tersalin!';
+          setTimeout(() => (copyCodeBtn.textContent = 'Salin'), 1400);
+        } catch (e) {
+          console.warn(e);
+        }
+      });
+    }
+
+    /* =========================================================
+       9. FAQ ACCORDION
+    ========================================================= */
+    document.querySelectorAll('.faq-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const content = item.querySelector('.faq-content');
+        const iconWrap = item.querySelector('.faq-icon');
+        const icon = iconWrap.querySelector('i');
+
+        const isOpen = content.classList.contains('open');
+
+        // close all others
+        document.querySelectorAll('.faq-content.open').forEach(c => {
+          if (c !== content) {
+            c.classList.remove('open');
+            const otherIcon = c.closest('.faq-item').querySelector('.faq-icon i');
+            if (otherIcon) {
+              otherIcon.setAttribute('data-lucide', 'plus');
+            }
+          }
+        });
+        // reset other icons
+        document.querySelectorAll('.faq-icon i').forEach(i => {
+          if (i.closest('.faq-item').querySelector('.faq-content') !== content) {
+            i.setAttribute('data-lucide', 'plus');
+          }
+        });
+
+        if (isOpen) {
+          content.classList.remove('open');
+          icon.setAttribute('data-lucide', 'plus');
+        } else {
+          content.classList.add('open');
+          icon.setAttribute('data-lucide', 'minus');
+        }
+        renderIcons();
+      });
+    });
+
+    /* =========================================================
+       10. NEWSLETTER FORM
+    ========================================================= */
+    const newsletterForm = document.getElementById('newsletterForm');
+    const newsletterMsg = document.getElementById('newsletterMsg');
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('newsletterEmail').value.trim();
+        if (!email) return;
+        newsletterMsg.textContent = '✓ Terima kasih! Cek inbox Anda untuk konfirmasi.';
+        newsletterMsg.classList.remove('hidden');
+        newsletterForm.reset();
+        setTimeout(() => newsletterMsg.classList.add('hidden'), 6000);
+      });
+    }
+
+    /* =========================================================
+       11. AUTO YEAR
+    ========================================================= */
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
