@@ -176,7 +176,7 @@
     <div class="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center text-[12px] font-medium sm:text-[13px]">
       <span class="hidden h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-emerald-400 sm:block"></span>
       <span class="text-slate-300">
-        <span class="font-bold text-white">Baru:</span> Model <span class="font-mono text-indigo-300">eduaccess-open-1</span> kini mendukung 26 bahasa &amp; mode disleksia.
+        <span class="font-bold text-white">Baru:</span> Model <span class="font-mono text-indigo-300">Openaccess-open-1</span> kini mendukung 26 bahasa &amp; mode disleksia.
       </span>
       <a href="#opensource" class="hidden items-center gap-1 font-semibold text-indigo-300 underline decoration-indigo-400/40 underline-offset-2 hover:text-indigo-200 sm:inline-flex">
         Baca rilis <i data-lucide="arrow-right" class="h-3 w-3"></i>
@@ -199,7 +199,7 @@
         </span>
         <span class="flex flex-col leading-none">
           <span class="text-[17px] font-extrabold tracking-tight text-slate-900 dark:text-white">
-            EduAccess<span class="text-indigo-600 dark:text-indigo-400"> AI</span>
+            Openaccess<span class="text-indigo-600 dark:text-indigo-400"> AI</span>
           </span>
           <span class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
             Non-Profit&nbsp;·&nbsp;.org
@@ -1038,7 +1038,7 @@
 <span class="text-slate-500">→ 200 OK</span>
 {
   <span class="text-sky-300">"result"</span>: <span class="text-amber-300">"..."</span>,
-  <span class="text-sky-300">"model"</span>: <span class="text-amber-300">"eduaccess-open-1"</span>,
+  <span class="text-sky-300">"model"</span>: <span class="text-amber-300">"Openaccess-open-1"</span>,
   <span class="text-sky-300">"safety_checked"</span>: <span class="text-orange-400">true</span>,
   <span class="text-sky-300">"bias_score"</span>: <span class="text-orange-400">0.02</span>
 }</code></pre>
@@ -1177,7 +1177,7 @@
             <div class="faq-content"><div>
               <p class="px-5 pb-5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                 Kami menggunakan kombinasi model terbuka yang kami fine-tune sendiri (seri
-                <span class="font-mono text-xs">eduaccess-open-1</span>) dengan lapisan evaluasi keamanan internal.
+                <span class="font-mono text-xs">Openaccess-open-1</span>) dengan lapisan evaluasi keamanan internal.
                 Seluruh bobot model, dataset pelatihan, dan kartu model dipublikasikan di repositori kami.
               </p>
             </div></div>
@@ -1316,7 +1316,7 @@
             </span>
             <span class="flex flex-col leading-none">
               <span class="text-[17px] font-extrabold tracking-tight text-slate-900 dark:text-white">
-                EduAccess<span class="text-indigo-600 dark:text-indigo-400"> AI</span>
+                Openaccess<span class="text-indigo-600 dark:text-indigo-400"> AI</span>
               </span>
               <span class="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">
                 Non-Profit&nbsp;·&nbsp;.org
@@ -1451,14 +1451,14 @@
     }
 
     // initial: stored > system
-    const storedTheme = localStorage.getItem('eduaccess-theme');
+    const storedTheme = localStorage.getItem('Openaccess-theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     applyTheme(storedTheme ? storedTheme === 'dark' : prefersDark);
 
     function toggleTheme() {
       const isDark = !html.classList.contains('dark');
       applyTheme(isDark);
-      localStorage.setItem('eduaccess-theme', isDark ? 'dark' : 'light');
+      localStorage.setItem('Openaccess-theme', isDark ? 'dark' : 'light');
     }
     themeBtn && themeBtn.addEventListener('click', toggleTheme);
     themeBtnMobile && themeBtnMobile.addEventListener('click', toggleTheme);
@@ -1982,7 +1982,7 @@
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `eduaccess-${currentMode}-${Date.now()}.txt`;
+      a.download = `Openaccess-${currentMode}-${Date.now()}.txt`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
